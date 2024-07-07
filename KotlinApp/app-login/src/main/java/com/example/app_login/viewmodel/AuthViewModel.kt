@@ -7,7 +7,9 @@ import com.example.lib_common.data.model.ResponseModel
 import com.example.lib_common.network.NetworkUtil
 import kotlinx.coroutines.launch
 import com.example.lib_common.util.Logger
+import com.example.lib_common.util.OriginalUtil
 import com.google.gson.Gson
+import java.time.Instant
 
 class AuthViewModel : BaseViewModel() {
 
@@ -36,8 +38,16 @@ class AuthViewModel : BaseViewModel() {
 
     fun sendRequest() {
 
+        val tiem = Instant.now().epochSecond.toString()
+        logger.i("当前时间戳：$tiem")
+        val dict = mapOf(
+            "gameid" to tiem,
+            "item" to "1000148",
+        )
+        val keyArray = listOf("gameid", "item")
 
-
+        val sign = OriginalUtil.original(dict, keyArray)
+        logger.i("当前sign：$sign")
         val requestModel = CommonModel(
             country = "CN",
             currency = "CNY",
@@ -51,20 +61,22 @@ class AuthViewModel : BaseViewModel() {
             netType = "wifi",
             osVer = "iOS15.5",
             sdkVer = "2.0",
-            sign = "aa9c05845520473f463092ae71976532",
+            sign = sign,
             time = 1718900443,
             uid = 2146570,
             uuid = "00000000-0000-0000-0000-000000000000",
-            wifi = ""
+            wifi = "",
+            partnerType = "100003",
+            partnerId = "3"
         )
-
+        logger.i("当前 request model：$requestModel")
         viewModelScope.launch {
             try {
                 val response = apiService.createRandomAccount(requestModel)
                 if (response.isSuccessful) {
                     // 处理成功的响应
                     response.body()?.let { responseBody ->
-                        val responseModel: ResponseModel = gson.fromJson(responseBody.string(), ResponseModel::class.java)
+                        val responseModel: ResponseModel = responseBody
                         // 处理解析后的数据模型
                         logger.d("解析后的数据模型: $responseModel")
                     }

@@ -11,7 +11,7 @@ object ToolService {
     }
 
     fun GetAppConfig(): AppConfig {
-        return AppConfig("YourSecretKey")
+        return AppConfig("e48b01cf58dc02886ac884d9a0422fc9")
     }
 }
 
