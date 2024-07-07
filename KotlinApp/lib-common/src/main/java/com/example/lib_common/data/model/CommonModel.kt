@@ -21,5 +21,6 @@ data class CommonModel(
     val time: Long,
     val uid: Int,
     val uuid: String,
-    val wifi: String
+    val wifi: String,
+    val referer: String
 )

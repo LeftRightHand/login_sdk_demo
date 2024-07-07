@@ -54,20 +54,21 @@ class AuthViewModel : BaseViewModel() {
             gamePkg = 1,
             gameVer = "1.0",
             gameid = 1000148,
-            idfv = "EA078AA9-1BFF-483C-88B3-4CE1888FFEBA",
+            idfv = "1711504937131-9096988129687434595",
             language = "zh-CN",
             mac = "02:00:00:00:00:00",
-            mode = "iPhone9,1",
+            mode = "MHA-AL00",
             netType = "wifi",
-            osVer = "iOS15.5",
+            osVer = "9",
             sdkVer = "2.0",
             sign = sign,
             time = 1718900443,
             uid = 2146570,
-            uuid = "00000000-0000-0000-0000-000000000000",
-            wifi = "",
-            partnerType = "100003",
-            partnerId = "3"
+            uuid = "afid_1711504937131-9096988129687434595",
+            wifi = "unknown",
+            partnerType = "100002",
+            partnerId = "2",
+            referer = "0"
         )
         logger.i("当前 request model：$requestModel")
         viewModelScope.launch {
