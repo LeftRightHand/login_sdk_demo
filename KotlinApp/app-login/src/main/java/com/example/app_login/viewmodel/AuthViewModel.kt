@@ -41,33 +41,32 @@ class AuthViewModel : BaseViewModel() {
         val tiem = Instant.now().epochSecond.toString()
         logger.i("当前时间戳：$tiem")
         val dict = mapOf(
-            "gameid" to tiem,
-            "item" to "1000148",
+            "gameid" to "1000148",
+            "tiem" to tiem,
         )
-        val keyArray = listOf("gameid", "item")
+        val keyArray = listOf("gameid", "tiem")
 
         val sign = OriginalUtil.original(dict, keyArray)
         logger.i("当前sign：$sign")
         val requestModel = CommonModel(
             country = "CN",
             currency = "CNY",
-            gamePkg = 1,
-            gameVer = "1.0",
-            gameid = 1000148,
+            game_pkg = "1",
+            game_ver = "1.0",
+            gameId = "1000148",
             idfv = "1711504937131-9096988129687434595",
             language = "zh-CN",
             mac = "02:00:00:00:00:00",
             mode = "MHA-AL00",
-            netType = "wifi",
-            osVer = "9",
-            sdkVer = "2.0",
+            net_type = "wifi",
+            os_ver = "9",
+            sdk_ver = "2.0",
             sign = sign,
-            time = 1718900443,
-            uid = 2146570,
+            time = tiem,
             uuid = "afid_1711504937131-9096988129687434595",
             wifi = "unknown",
-            partnerType = "100002",
-            partnerId = "2",
+            partner_type = "100002",
+            partner_id = "2",
             referer = "0"
         )
         logger.i("当前 request model：$requestModel")

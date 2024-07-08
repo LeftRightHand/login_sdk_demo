@@ -1,35 +1,30 @@
 package com.example.lib_common.util
 
+import com.example.lib_common.constant.SECRECT_KEY
 import java.security.MessageDigest
 
-object ToolService {
-
-    fun MD5(md5Str: String): String {
-        val md = MessageDigest.getInstance("MD5")
-        val digest = md.digest(md5Str.toByteArray())
-        return digest.joinToString("") { "%02x".format(it) }.toUpperCase()
-    }
-
-    fun GetAppConfig(): AppConfig {
-        return AppConfig("e48b01cf58dc02886ac884d9a0422fc9")
-    }
+fun String.toMD5(): String {
+    val bytes = this.toByteArray()
+    val md = MessageDigest.getInstance("MD5")
+    val digest = md.digest(bytes)
+    return digest.joinToString("") { "%02x".format(it) }
 }
 
+
 object OriginalUtil {
+    private val logger = Logger.LoggerProvider.provide()
     fun original(dict: Map<String, String>, keyArray: List<String>): String {
         var temp = ""
         for (i in keyArray.indices) {
             temp += dict[keyArray[i]]
-            if (i != keyArray.size - 1) {
-                temp += "yah$"
-            }
-            if (i == keyArray.size - 1) {
-                temp += "@"
+            temp += if (i == keyArray.size - 1) {
+                "@"
+            } else {
+                "yah$"
             }
         }
-        val finalStr = temp + ToolService.GetAppConfig().secrectKey
-        return ToolService.MD5(finalStr).toLowerCase()
+        val finalStr = temp + SECRECT_KEY
+        logger.i("OriginalUtil , finalStr:$finalStr")
+        return finalStr.toMD5()
     }
 }
-
-data class AppConfig(val secrectKey: String)
