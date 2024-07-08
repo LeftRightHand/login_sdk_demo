@@ -4,7 +4,6 @@ import com.example.lib_common.data.model.CommonModel
 import com.example.lib_common.data.model.LoginRequest
 import com.example.lib_common.data.model.LoginResponse
 import com.example.lib_common.data.model.ResponseModel
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -18,3 +17,5 @@ interface ApiService {
     @POST("/fb/createAccount")
     suspend fun createRandomAccount(@Body requestModel: CommonModel): Response<ResponseModel>
 }
+
+
