@@ -3,7 +3,6 @@ package com.example.app_login.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.app_login.R
 import com.example.app_login.databinding.ActivityLoginBinding
