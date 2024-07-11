@@ -1,11 +1,9 @@
 package com.example.lib_common.data.model
 
-data class ResponseModel(
-    val status: Int,
-    val data: Any,
+data class ResponseModel<T>(
+    val data: T,
+    val code: Int,
     val msg: String,
-    val success: Boolean,
-    val message: String
 )
 
 data class Data(

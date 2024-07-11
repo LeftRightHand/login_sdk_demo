@@ -18,6 +18,8 @@ class AuthActivity() : BaseActivity() {
         val binding: ActivityAuthBinding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        viewModel.sendActive()
     }
 
 }

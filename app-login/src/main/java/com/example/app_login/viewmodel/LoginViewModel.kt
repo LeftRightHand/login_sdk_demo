@@ -14,6 +14,11 @@ class LoginViewModel : BaseViewModel() {
     private val _loginResult = MutableLiveData<Boolean>()
     val loginResult: LiveData<Boolean> = _loginResult
 
+
+    override fun onCleared() {
+        super.onCleared()
+    }
+
     fun onLoginClicked() {
         println("login view model click")
         if (!username.value.isNullOrEmpty() && !password.value.isNullOrEmpty()) {

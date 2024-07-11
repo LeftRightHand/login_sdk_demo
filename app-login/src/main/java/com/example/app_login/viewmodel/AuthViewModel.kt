@@ -1,30 +1,55 @@
 package com.example.app_login.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.app_login.repository.AuthRepository
+import com.example.app_login.repository.UserRepository
 import com.example.lib_common.base.BaseViewModel
-import com.example.lib_common.data.model.ResponseModel
-import com.example.lib_common.network.NetworkUtil
+import com.example.lib_common.data.model.AccountModel
+import com.example.lib_common.data.model.ActiveModel
+import com.example.lib_common.response.BaseResponse
 import com.example.lib_common.util.Logger
-import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
-class AuthViewModel : BaseViewModel() {
 
-    private val apiService = NetworkUtil.apiService
-
-    private val gson = Gson()
+class AuthViewModel() : BaseViewModel() {
 
     private val logger = Logger.LoggerProvider.provide()
+    private val userRepository by lazy { UserRepository() }
 
-    override fun onCleared() {
-        super.onCleared()
-        // 在这里清理资源或取消任何可能的异步操作
+    private val _createAccountResult = MutableLiveData<BaseResponse<AccountModel>>()
+    val createAccountResult: LiveData<BaseResponse<AccountModel>> = _createAccountResult
+
+    private val _activeResult = MutableLiveData<BaseResponse<ActiveModel>>()
+    val activeResult: LiveData<BaseResponse<ActiveModel>> = _activeResult
+
+    fun login(username: String, password: String) {
+
     }
 
+    fun createRandomAccount() {
+        viewModelScope.launch {
+            val response = userRepository.createRandomAccount()
+            response?.let {
+                _createAccountResult.value = BaseResponse(data = it, msg = "Success", code = 1)
+            } ?: run {
+                _createAccountResult.value = BaseResponse(msg = "Creation failed", code = -1, data = null)
+            }
+        }
+    }
+
+    fun active(install: String, wPixels: String, hPixels: String) {
+
+        launchUI(errorBlock = { code, error ->
+            logger.d("AuthViewModel errorBlock")
+        }) {
+            val response = userRepository.active(install, wPixels, hPixels)
+            logger.d("AuthViewModel active: $response")
+        }
+    }
     fun onFastLoginClicked() {
         sendRequest()
     }
@@ -46,26 +71,12 @@ class AuthViewModel : BaseViewModel() {
 
     fun sendRequest() {
         viewModelScope.launch {
-            val call = apiService.createRandomAccount()
-            call.enqueue(object : Callback<ResponseModel> {
-                override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
-                    if (response.isSuccessful) {
-                        val responseBody = response.body()
-                        logger.d("active 请求成功：$responseBody")
-                        // 处理响应
-                    } else {
-                        // 处理错误
-                        val responseBody = response.body()
-                        logger.d("active 请求失败：$responseBody")
-                    }
-                }
-                override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                    // 处理失败
-                    logger.e("active 请求失败：${t.message}")
-                }
-            })
-        }
 
+        }
+    }
+
+    fun sendActive() {
+        active("0", "0", "0")
     }
 }
 

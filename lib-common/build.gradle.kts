@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+    implementation(libs.retrofit2.coroutines.adapter)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -85,6 +85,7 @@ dependencies {
 
     //... network
     implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
     implementation(libs.converter.gson)
     implementation(libs.gson)
 }
