@@ -1,5 +1,6 @@
 package com.example.lib_common.reqository
 
+import com.example.lib_common.error.ApiException
 import com.example.lib_common.response.BaseResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,6 +22,10 @@ open class BaseRepository {
                 requestCall()
             }
         } ?: return null
+
+        if (response.isFailed()) {
+            throw ApiException(code = response.code, msg = response.msg)
+        }
 
         return response.data
     }

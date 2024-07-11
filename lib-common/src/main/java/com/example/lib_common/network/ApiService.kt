@@ -18,11 +18,11 @@ interface ApiService {
     ): BaseResponse<UserModel>
 
     @POST("/fb/createAccount")
-    fun createRandomAccount(): BaseResponse<AccountModel>
+    suspend fun createRandomAccount(): BaseResponse<AccountModel>
 
     @FormUrlEncoded
     @POST("active")
-    fun active(
+    suspend fun active(
         @Field("install") install: String,
         @Field("wpixels") wPixels: String,
         @Field("hpixels") hPixels: String

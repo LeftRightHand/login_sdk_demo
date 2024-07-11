@@ -19,7 +19,7 @@ data class ActiveModel(
     val commentsTime: Int,
     val isCacheCountryCurrency: Int,
     val buoy: String,
-    val languageConf: List<Any>, // 使用Any来表示未知类型的列表
+    val languageConf: String, // 使用Any来表示未知类型的列表
     val zfalertVC: Int,
     val isOuterPayment: Int,
     val areaCode: Int,

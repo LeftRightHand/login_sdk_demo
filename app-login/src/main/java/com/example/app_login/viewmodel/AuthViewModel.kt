@@ -42,7 +42,6 @@ class AuthViewModel() : BaseViewModel() {
     }
 
     fun active(install: String, wPixels: String, hPixels: String) {
-
         launchUI(errorBlock = { code, error ->
             logger.d("AuthViewModel errorBlock")
         }) {
