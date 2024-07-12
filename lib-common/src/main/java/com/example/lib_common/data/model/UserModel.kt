@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class UserModel(
     @SerializedName("areaCode") val areaCode: Int,
     @SerializedName("banding_username") val bandingUsername: String?,
-    @SerializedName("bind_array") val bindArray: List<String>,
     @SerializedName("bind_email") val bindEmail: String,
     @SerializedName("bind_phone_pop") val bindPhonePop: Int,
     @SerializedName("isRealName") val isRealName: Int,

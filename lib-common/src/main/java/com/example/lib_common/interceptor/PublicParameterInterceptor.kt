@@ -1,6 +1,7 @@
 package com.example.lib_common.interceptor
 
 import com.example.lib_common.data.model.BaseRequestModel
+import com.example.lib_common.util.OriginalUtil
 import okhttp3.FormBody
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -43,10 +44,19 @@ import okhttp3.Response
 //    }
 //}
 
-class PublicParameterInterceptor(private val requestModel: BaseRequestModel) : Interceptor {
+class PublicParameterInterceptor(private var requestModel: BaseRequestModel) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val originalUrl = originalRequest.url
+
+        val currentTimeSeconds = System.currentTimeMillis() / 1000
+        val time = currentTimeSeconds.toString()
+        val dict = mapOf(
+            "gameid" to requestModel.gameId,
+            "time" to time,
+        )
+        val keyArray = listOf("gameid", "time")
+        val sign = OriginalUtil.original(dict, keyArray)
 
         val newUrl = originalUrl.newBuilder()
             .addQueryParameter("country", requestModel.country)
@@ -64,8 +74,8 @@ class PublicParameterInterceptor(private val requestModel: BaseRequestModel) : I
             .addQueryParameter("partner_type", requestModel.partnerType)
             .addQueryParameter("referer", requestModel.referer)
             .addQueryParameter("sdk_ver", requestModel.sdkVer)
-            .addQueryParameter("sign", requestModel.sign)
-            .addQueryParameter("time", requestModel.time)
+            .addQueryParameter("sign", sign)
+            .addQueryParameter("time", time)
             .addQueryParameter("uuid", requestModel.uuid)
             .addQueryParameter("wifi", requestModel.wifi)
             .build()

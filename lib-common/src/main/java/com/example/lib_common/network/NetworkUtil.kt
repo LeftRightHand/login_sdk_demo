@@ -57,6 +57,8 @@ object NetworkUtil {
             .readTimeout(12, TimeUnit.SECONDS)
         // 添加参数拦截器
         build.addInterceptor(HeaderInterceptor())
+
+
         build.addInterceptor(PublicParameterInterceptor(requestModel))
         //日志拦截器
         val logInterceptor = HttpLoggingInterceptor { message: String ->

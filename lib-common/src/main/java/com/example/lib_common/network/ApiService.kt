@@ -17,11 +17,18 @@ interface ApiService {
         @Field("passwork") passwork: String,
     ): BaseResponse<UserModel>
 
+    @FormUrlEncoded
+    @POST("/user/register")
+    suspend fun regitration(
+        @Field("username") username: String,
+        @Field("passwork") passwork: String,
+    ): BaseResponse<UserModel>
+
     @POST("/fb/createAccount")
-    suspend fun createRandomAccount(): BaseResponse<AccountModel>
+    suspend fun createRandomAccount(): BaseResponse<AccountModel?>?
 
     @FormUrlEncoded
-    @POST("active")
+    @POST("/active")
     suspend fun active(
         @Field("install") install: String,
         @Field("wpixels") wPixels: String,
