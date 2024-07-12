@@ -21,7 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "KotlinApp"
 include(":app")
-include(":login-sdk")
 include(":app-login")
 include(":app-webview")
 include(":lib-common")

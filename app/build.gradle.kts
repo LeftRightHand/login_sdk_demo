@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.room.compiler.processing.testing)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,7 +74,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //ui
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
 }
