@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
@@ -8,11 +8,11 @@ android {
     compileSdk = Config.SdkVersions.compile
 
     defaultConfig {
-        applicationId = "com.example.app_login"
+//        applicationId = "com.example.app_login"
         minSdk = Config.SdkVersions.min
         targetSdk = Config.SdkVersions.target
-        versionCode = 1
-        versionName = Config.version
+//        versionCode = 1
+//        versionName = Config.version
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
