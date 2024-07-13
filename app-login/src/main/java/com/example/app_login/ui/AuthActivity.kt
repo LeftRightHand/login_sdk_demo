@@ -15,12 +15,15 @@ internal class AuthActivity() : BaseActivity() {
     private val logger = Logger.LoggerProvider.provide()
     private val viewModel: AuthViewModel by viewModels()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding: ActivityAuthBinding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        setContentView(binding.root)
 
         viewModel.sendActive()
         initData()

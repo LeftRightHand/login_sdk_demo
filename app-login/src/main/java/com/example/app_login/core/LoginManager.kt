@@ -31,7 +31,7 @@ object LoginManager {
             }
             process = null
         })
-//        process?.start()
+        process?.start()
     }
     fun setLoginListener(listener: LoginListener) {
         this.listener = listener
