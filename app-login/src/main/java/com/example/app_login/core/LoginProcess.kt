@@ -16,7 +16,8 @@ internal class LoginProcess(
         onFinish?.invoke(response)
     }
     override fun start() {
-        context.startActivity(Intent(context, AuthActivity::class.java))
+        val intent = Intent(context, AuthActivity::class.java)
+        context.startActivity(intent)
     }
 
     override fun resume(result: LoginResult) {

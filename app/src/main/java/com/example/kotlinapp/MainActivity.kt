@@ -1,24 +1,27 @@
 package com.example.kotlinapp
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.example.app_login.core.LoginListener
 import com.example.app_login.core.LoginManager
 import com.example.app_login.core.LoginResult
+import com.example.kotlinapp.databinding.ActivityMainBinding
 
 
-class MainActivity : ComponentActivity(), LoginListener {
-
+class MainActivity : AppCompatActivity(), LoginListener {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         LoginManager.setLoginListener(this)
-//        val button = findViewById<Button>(R.id.button1)
-//        button.setOnClickListener {
-//            LoginManager.login(this)
-//        }
+        val button = findViewById<Button>(R.id.button1)
+        button.setOnClickListener {
+            LoginManager.login(this)
+        }
+
     }
 
     override fun onLoginSuccess(loginResult: LoginResult) {

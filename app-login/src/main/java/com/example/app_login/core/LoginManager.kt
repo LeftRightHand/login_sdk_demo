@@ -1,6 +1,5 @@
 package com.example.app_login.core
 
-import android.annotation.SuppressLint
 import android.content.Context
 
 object LoginManager {
@@ -32,6 +31,7 @@ object LoginManager {
             }
             process = null
         })
+//        process?.start()
     }
     fun setLoginListener(listener: LoginListener) {
         this.listener = listener
