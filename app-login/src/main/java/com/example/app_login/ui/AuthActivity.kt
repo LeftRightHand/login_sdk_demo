@@ -2,8 +2,6 @@ package com.example.app_login.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
-import com.example.app_login.R
 import com.example.app_login.core.LoginManager
 import com.example.app_login.core.LoginResult
 import com.example.app_login.databinding.ActivityAuthBinding
@@ -14,15 +12,12 @@ import com.example.lib_common.util.Logger
 internal class AuthActivity() : BaseActivity() {
     private val logger = Logger.LoggerProvider.provide()
     private val viewModel: AuthViewModel by viewModels()
-
+    private lateinit var binding: ActivityAuthBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityAuthBinding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
+        binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel.sendActive()
